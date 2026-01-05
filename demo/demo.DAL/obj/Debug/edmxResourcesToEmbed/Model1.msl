@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QLDICHBENHModelStoreContainer" CdmEntityContainer="QLDICHBENHEntities">
+    <EntitySetMapping Name="DiaPhuong">
+      <EntityTypeMapping TypeName="QLDICHBENHModel.DiaPhuong">
+        <MappingFragment StoreEntitySet="DiaPhuong">
+          <ScalarProperty Name="MaDP" ColumnName="MaDP" />
+          <ScalarProperty Name="TenDP" ColumnName="TenDP" />
+          <ScalarProperty Name="SoCaNhiemMoi" ColumnName="SoCaNhiemMoi" />
+          <ScalarProperty Name="MaTT" ColumnName="MaTT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrangThai">
+      <EntityTypeMapping TypeName="QLDICHBENHModel.TrangThai">
+        <MappingFragment StoreEntitySet="TrangThai">
+          <ScalarProperty Name="MaTT" ColumnName="MaTT" />
+          <ScalarProperty Name="TenTT" ColumnName="TenTT" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

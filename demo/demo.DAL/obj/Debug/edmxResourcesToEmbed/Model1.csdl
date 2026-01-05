@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLDICHBENHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DiaPhuong">
+    <Key>
+      <PropertyRef Name="MaDP" />
+    </Key>
+    <Property Name="MaDP" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenDP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SoCaNhiemMoi" Type="Int32" Nullable="false" />
+    <Property Name="MaTT" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TrangThai" Relationship="Self.FK_DIAPHUONG_TinhHinh" FromRole="DiaPhuong" ToRole="TrangThai" />
+  </EntityType>
+  <EntityType Name="TrangThai">
+    <Key>
+      <PropertyRef Name="MaTT" />
+    </Key>
+    <Property Name="MaTT" Type="Int32" Nullable="false" />
+    <Property Name="TenTT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DiaPhuong" Relationship="Self.FK_DIAPHUONG_TinhHinh" FromRole="TrangThai" ToRole="DiaPhuong" />
+  </EntityType>
+  <Association Name="FK_DIAPHUONG_TinhHinh">
+    <End Role="TrangThai" Type="Self.TrangThai" Multiplicity="1" />
+    <End Role="DiaPhuong" Type="Self.DiaPhuong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrangThai">
+        <PropertyRef Name="MaTT" />
+      </Principal>
+      <Dependent Role="DiaPhuong">
+        <PropertyRef Name="MaTT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLDICHBENHEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DiaPhuong" EntityType="Self.DiaPhuong" />
+    <EntitySet Name="TrangThai" EntityType="Self.TrangThai" />
+    <AssociationSet Name="FK_DIAPHUONG_TinhHinh" Association="Self.FK_DIAPHUONG_TinhHinh">
+      <End Role="TrangThai" EntitySet="TrangThai" />
+      <End Role="DiaPhuong" EntitySet="DiaPhuong" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

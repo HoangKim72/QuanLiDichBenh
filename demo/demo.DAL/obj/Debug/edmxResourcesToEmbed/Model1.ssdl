@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLDICHBENHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DiaPhuong">
+    <Key>
+      <PropertyRef Name="MaDP" />
+    </Key>
+    <Property Name="MaDP" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="TenDP" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SoCaNhiemMoi" Type="int" Nullable="false" />
+    <Property Name="MaTT" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TrangThai">
+    <Key>
+      <PropertyRef Name="MaTT" />
+    </Key>
+    <Property Name="MaTT" Type="int" Nullable="false" />
+    <Property Name="TenTT" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="GhiChu" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_DIAPHUONG_TinhHinh">
+    <End Role="TrangThai" Type="Self.TrangThai" Multiplicity="1" />
+    <End Role="DiaPhuong" Type="Self.DiaPhuong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrangThai">
+        <PropertyRef Name="MaTT" />
+      </Principal>
+      <Dependent Role="DiaPhuong">
+        <PropertyRef Name="MaTT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLDICHBENHModelStoreContainer">
+    <EntitySet Name="DiaPhuong" EntityType="Self.DiaPhuong" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrangThai" EntityType="Self.TrangThai" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DIAPHUONG_TinhHinh" Association="Self.FK_DIAPHUONG_TinhHinh">
+      <End Role="TrangThai" EntitySet="TrangThai" />
+      <End Role="DiaPhuong" EntitySet="DiaPhuong" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

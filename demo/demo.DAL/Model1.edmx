@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLDICHBENHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DiaPhuong">
+          <Key>
+            <PropertyRef Name="MaDP" />
+          </Key>
+          <Property Name="MaDP" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="TenDP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SoCaNhiemMoi" Type="int" Nullable="false" />
+          <Property Name="MaTT" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrangThai">
+          <Key>
+            <PropertyRef Name="MaTT" />
+          </Key>
+          <Property Name="MaTT" Type="int" Nullable="false" />
+          <Property Name="TenTT" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_DIAPHUONG_TinhHinh">
+          <End Role="TrangThai" Type="Self.TrangThai" Multiplicity="1" />
+          <End Role="DiaPhuong" Type="Self.DiaPhuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrangThai">
+              <PropertyRef Name="MaTT" />
+            </Principal>
+            <Dependent Role="DiaPhuong">
+              <PropertyRef Name="MaTT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLDICHBENHModelStoreContainer">
+          <EntitySet Name="DiaPhuong" EntityType="Self.DiaPhuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrangThai" EntityType="Self.TrangThai" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DIAPHUONG_TinhHinh" Association="Self.FK_DIAPHUONG_TinhHinh">
+            <End Role="TrangThai" EntitySet="TrangThai" />
+            <End Role="DiaPhuong" EntitySet="DiaPhuong" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLDICHBENHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DiaPhuong">
+          <Key>
+            <PropertyRef Name="MaDP" />
+          </Key>
+          <Property Name="MaDP" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenDP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SoCaNhiemMoi" Type="Int32" Nullable="false" />
+          <Property Name="MaTT" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TrangThai" Relationship="Self.FK_DIAPHUONG_TinhHinh" FromRole="DiaPhuong" ToRole="TrangThai" />
+        </EntityType>
+        <EntityType Name="TrangThai">
+          <Key>
+            <PropertyRef Name="MaTT" />
+          </Key>
+          <Property Name="MaTT" Type="Int32" Nullable="false" />
+          <Property Name="TenTT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DiaPhuong" Relationship="Self.FK_DIAPHUONG_TinhHinh" FromRole="TrangThai" ToRole="DiaPhuong" />
+        </EntityType>
+        <Association Name="FK_DIAPHUONG_TinhHinh">
+          <End Role="TrangThai" Type="Self.TrangThai" Multiplicity="1" />
+          <End Role="DiaPhuong" Type="Self.DiaPhuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrangThai">
+              <PropertyRef Name="MaTT" />
+            </Principal>
+            <Dependent Role="DiaPhuong">
+              <PropertyRef Name="MaTT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLDICHBENHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DiaPhuong" EntityType="Self.DiaPhuong" />
+          <EntitySet Name="TrangThai" EntityType="Self.TrangThai" />
+          <AssociationSet Name="FK_DIAPHUONG_TinhHinh" Association="Self.FK_DIAPHUONG_TinhHinh">
+            <End Role="TrangThai" EntitySet="TrangThai" />
+            <End Role="DiaPhuong" EntitySet="DiaPhuong" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLDICHBENHModelStoreContainer" CdmEntityContainer="QLDICHBENHEntities">
+          <EntitySetMapping Name="DiaPhuong">
+            <EntityTypeMapping TypeName="QLDICHBENHModel.DiaPhuong">
+              <MappingFragment StoreEntitySet="DiaPhuong">
+                <ScalarProperty Name="MaDP" ColumnName="MaDP" />
+                <ScalarProperty Name="TenDP" ColumnName="TenDP" />
+                <ScalarProperty Name="SoCaNhiemMoi" ColumnName="SoCaNhiemMoi" />
+                <ScalarProperty Name="MaTT" ColumnName="MaTT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrangThai">
+            <EntityTypeMapping TypeName="QLDICHBENHModel.TrangThai">
+              <MappingFragment StoreEntitySet="TrangThai">
+                <ScalarProperty Name="MaTT" ColumnName="MaTT" />
+                <ScalarProperty Name="TenTT" ColumnName="TenTT" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

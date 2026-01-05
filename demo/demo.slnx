@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="demo.BLL/demo.BLL.csproj" Id="8a49da5d-d0e2-486f-94e8-6b798957e641">
+    <BuildDependency Project="demo.DAL/demo.DAL.csproj" />
+  </Project>
+  <Project Path="demo.DAL/demo.DAL.csproj" Id="6d8dcad5-b337-497e-a650-c30de9df7d61" />
+  <Project Path="demo.GUI/demo.GUI.csproj" Id="17a03eeb-3baa-4ddb-afb1-1180c21467c5">
+    <BuildDependency Project="demo.BLL/demo.BLL.csproj" />
+    <BuildDependency Project="demo.DAL/demo.DAL.csproj" />
+  </Project>
+</Solution>
